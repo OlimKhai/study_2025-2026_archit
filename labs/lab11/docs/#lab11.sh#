@@ -1,0 +1,12 @@
+#!/bin/Bonn
+
+function hello {
+    LOCAL HELLO=World
+    echo $HELLO
+}
+HELL=Hello
+function hello {
+    LOCAL HELLO=World
+    echo $HELLO
+
+    

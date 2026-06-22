@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Лабораторная работа №13</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Лабораторная работа №13</h1>
+<p class="subtitle">Программирование в командном процессоре ОС UNIX.
+Ветвления и циклы</p>
+<p class="author">true</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a
+href="#лабораторная-работа-13.-программирование-в-командном-процессоре-ос-unix.-ветвления-и-циклы"
+id="toc-лабораторная-работа-13.-программирование-в-командном-процессоре-ос-unix.-ветвления-и-циклы">Лабораторная
+работа №13. Программирование в командном процессоре ОС UNIX. Ветвления и
+циклы</a></li>
+<li><a href="#хайдаров-олим.-нбибд-02-25"
+id="toc-хайдаров-олим.-нбибд-02-25">Хайдаров Олим. НБИбд-02-25</a>
+<ul>
+<li><a href="#содержание" id="toc-содержание">Содержание</a></li>
+<li><a href="#цель-работы" id="toc-цель-работы">Цель работы</a></li>
+<li><a href="#выполнение-лабораторной-работы"
+id="toc-выполнение-лабораторной-работы">Выполнение лабораторной
+работы</a>
+<ul>
+<li><a href="#20-использование-getopts-и-grep"
+id="toc-20-использование-getopts-и-grep">2.0 Использование getopts и
+grep</a></li>
+<li><a href="#21-взаимодействие-си-и-bash"
+id="toc-21-взаимодействие-си-и-bash">2.1 Взаимодействие Си и
+Bash</a></li>
+<li><a href="#22-циклы-и-управление-файлами"
+id="toc-22-циклы-и-управление-файлами">2.2 Циклы и управление
+файлами</a></li>
+<li><a href="#23-архивация-с-помощью-find"
+id="toc-23-архивация-с-помощью-find">2.3 Архивация с помощью
+find</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#выводы" id="toc-выводы">Выводы</a></li>
+<li><a href="#контрольные-вопросы"
+id="toc-контрольные-вопросы">Контрольные вопросы</a></li>
+<li><a href="#список-литературы" id="toc-список-литературы">Список
+литературы</a></li>
+</ul>
+</nav>
+<h1
+id="лабораторная-работа-13.-программирование-в-командном-процессоре-ос-unix.-ветвления-и-циклы">Лабораторная
+работа №13. Программирование в командном процессоре ОС UNIX. Ветвления и
+циклы</h1>
+<h1 id="хайдаров-олим.-нбибд-02-25">Хайдаров Олим. НБИбд-02-25</h1>
+<hr />
+<h2 id="содержание">Содержание</h2>
+<ol type="1">
+<li><a href="#цель-работы">Цель работы</a></li>
+<li><a href="#выполнение-лабораторной-работы">Выполнение лабораторной
+работы</a>
+<ul>
+<li><a href="#20-использование-getopts-и-grep">2.0 Использование getopts
+и grep</a></li>
+<li><a href="#21-взаимодействие-си-и-bash">2.1 Взаимодействие Си и
+Bash</a></li>
+<li><a href="#22-циклы-и-управление-файлами">2.2 Циклы и управление
+файлами</a></li>
+<li><a href="#23-архивация-с-помощью-find">2.3 Архивация с помощью
+find</a></li>
+</ul></li>
+<li><a href="#вывод">Вывод</a></li>
+<li><a href="#контрольные-вопросы">Контрольные вопросы</a></li>
+<li><a href="#список-литературы">Список литературы</a></li>
+</ol>
+<hr />
+<h2 id="цель-работы">Цель работы</h2>
+<p>Изучить основы программирования в оболочке ОС UNIX. Научится писать
+более сложные командные файлы с использованием логических управляющих
+конструкций и циклов.</p>
+<hr />
+<h2 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h2>
+<h3 id="20-использование-getopts-и-grep">2.0 Использование getopts и
+grep</h3>
+<p>Условие: Написать командный файл, который анализирует командную
+строку с ключами <code>-i</code>, <code>-o</code>, <code>-p</code>,
+<code>-C</code>, <code>-n</code> и ищет в указанном файле нужные
+строки.</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-31-31.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<p>Пишем код Командного файла:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-50-26.png"
+alt="Командный файл, 1-я часть" />
+<figcaption aria-hidden="true">Командный файл, 1-я часть</figcaption>
+</figure>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-50-56.png"
+alt="Командный файл, 2-я часть" />
+<figcaption aria-hidden="true">Командный файл, 2-я часть</figcaption>
+</figure>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-51-05.png"
+alt="Командный файл, 3-я часть" />
+<figcaption aria-hidden="true">Командный файл, 3-я часть</figcaption>
+</figure>
+<ul>
+<li>создаем тестовый файл - в нем будет набор строк с информацией,
+фрагмент которой мы будем в дальнейшем искать (помимо искомой, мы
+добавим строки с содержанием другой информации, для проверки работы
+программы) - это слово “Apple”</li>
+</ul>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-52-29.png"
+alt="Тестовый файл" />
+<figcaption aria-hidden="true">Тестовый файл</figcaption>
+</figure>
+<p>Далее мы делаем файл task1_search.sh исполняемым и запускаем процесс
+проверки работы:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-53-31.png"
+alt="Проверка работы" />
+<figcaption aria-hidden="true">Проверка работы</figcaption>
+</figure>
+<p>Также если мы введем файл без искомого слова, которое мы ищем и без
+пути, то нам выдается следующее:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-54-26.png"
+alt="Тест файла" />
+<figcaption aria-hidden="true">Тест файла</figcaption>
+</figure>
+<p>После выдется опции параметров ввода – снизу сообщения об ошибки – с
+целью, чтобы пользователь специфицировал запрос на основе предложенных
+вариантов ввода</p>
+<p>Также мы далее смотрим, что было записано в реестр-файл, записывающий
+результаты экзекуции программы:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2016-57-43.png"
+alt="Реестр-файл результата" />
+<figcaption aria-hidden="true">Реестр-файл результата</figcaption>
+</figure>
+<p>Результат выполнения:</p>
+<p>Скрипт корректно распознает флаги. Если передать ключ -C, поиск
+становится чувствительным к регистру. Если передать -n, в результат
+добавляются номера строк.</p>
+<h3 id="21-взаимодействие-си-и-bash">2.1 Взаимодействие Си и Bash</h3>
+<p>Условие: Написать программу на Си, которая определяет знак числа и
+завершается с кодом 0, 1 или 2. Написать скрипт, который вызывает эту
+программу и анализирует код возврата через $?.</p>
+<p>Создаем файл:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-07-51.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<p>Пишем код программы, которая проверяет вводимые числа:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-05-48.png"
+alt="Программа проверки чисел" />
+<figcaption aria-hidden="true">Программа проверки чисел</figcaption>
+</figure>
+<p>Далее код для компиляция Си-программы:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-47-03.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-42-58.png"
+alt="Си-программа" />
+<figcaption aria-hidden="true">Си-программа</figcaption>
+</figure>
+<p>Далее делаем ее исполняемой через команду chmod +x task2_wrapper.sh
+(из первого скрина)</p>
+<p>Запуск программы:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-47-48.png"
+alt="Запуск программы" />
+<figcaption aria-hidden="true">Запуск программы</figcaption>
+</figure>
+<p>– проверяем, ввода Положительное, Отрицательное числа, и в конце
+вводим число 0 – на что программа успешно отвечает нам и определила их
+соответствующе</p>
+<p>Результат выполнения:</p>
+<p>Скрипт компилирует .c файл, запускает его, считывает введенное число
+и выводит вердикт на основе кода завершения программы Си.</p>
+<h3 id="22-циклы-и-управление-файлами">2.2 Циклы и управление
+файлами</h3>
+<p>Условие: Написать файл, создающий N файлов (1.tmp…N.tmp) по
+аргументу. Скрипт должен уметь также и удалять эти файлы.</p>
+<p>Создаем файл:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-52-57.png"
+alt="Создение файла" />
+<figcaption aria-hidden="true">Создение файла</figcaption>
+</figure>
+<p>Потом вводим программу, которая создаем N файлом и удаляет также эти
+файлы:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-52-05.png"
+alt="Создание программы" />
+<figcaption aria-hidden="true">Создание программы</figcaption>
+</figure>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-52-12.png"
+alt="Создание программы" />
+<figcaption aria-hidden="true">Создание программы</figcaption>
+</figure>
+<p>Делаем её исполняемой с помощью команды chmod +x (из первого
+скрина)</p>
+<p>Запускаем и проверяем работу файла - успешно было создано 5
+файлов</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-53-28.png"
+alt="Запуск работы файла" />
+<figcaption aria-hidden="true">Запуск работы файла</figcaption>
+</figure>
+<p>Проверяем их наличие с помощью команды ls</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-53-59.png"
+alt="Проверка наличия файлов" />
+<figcaption aria-hidden="true">Проверка наличия файлов</figcaption>
+</figure>
+<p>– как видим, да, файлы имеются</p>
+<p>Далее удаляем их</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-54-31.png"
+alt="Удаление файлов" />
+<figcaption aria-hidden="true">Удаление файлов</figcaption>
+</figure>
+<p>Программа работает, мы успешно создали и удалили 5 файлов .tmp -
+формата</p>
+<p>Результат выполнения:</p>
+<p>Запуск ./task3_files.sh create 5 создает файлы 1.tmp…5.tmp. Запуск
+./task3_files.sh delete 5 удаляет их.</p>
+<h3 id="23-архивация-с-помощью-find">2.3 Архивация с помощью find</h3>
+<p>Условие: Написать файл, который архивирует файлы, измененные менее
+недели назад, используя find и tar.</p>
+<p>Создаем файл [Создание файла] :</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-59-10.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<p>Далее пишем код программы, соответствующей условиям:</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-58-28.png"
+alt="Код программы, 1-я часть" />
+<figcaption aria-hidden="true">Код программы, 1-я часть</figcaption>
+</figure>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-58-53.png"
+alt="Код программы, 2-я часть" />
+<figcaption aria-hidden="true">Код программы, 2-я часть</figcaption>
+</figure>
+<p>Далее делаем файл исполняемым [Файл исполняемый] (с помощью команды
+chmod +x):</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2017-59-50.png"
+alt="Файл исполняемый" />
+<figcaption aria-hidden="true">Файл исполняемый</figcaption>
+</figure>
+<p>Создаем файлы-реестры, с давностью изменения 2 дня назад, сегодня, 10
+дней назад и 3 дня назад [Файлы-реестры] :</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2018-02-54.png"
+alt="Файлы-реестры" />
+<figcaption aria-hidden="true">Файлы-реестры</figcaption>
+</figure>
+<p>Запуск работы и [Результат] :</p>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-09%2018-03-10.png"
+alt="Результат" />
+<figcaption aria-hidden="true">Результат</figcaption>
+</figure>
+<p>Результат выполнения:</p>
+<p>Скрипт находит файлы (например, recent.txt, созданный вчера) и
+добавляет их в week_backup.tar.gz. Файлы, созданные месяц назад,
+игнорируются.</p>
+<hr />
+<h1 id="выводы">Выводы</h1>
+<p>В ходе лабораторной работы №13 я научился и изучил:</p>
+<ol type="1">
+<li>Синтаксический анализ командной строки с помощью команды getopts и
+реализовал поиск через grep;</li>
+<li>Изучил механизм взаимодействия интерпретатора Bash и компилируемых
+программ (Си) черех код завершения $?;</li>
+<li>Научился использовать циклы for для пакетного создания и удаления
+файлов ;</li>
+<li>Применил утилиту find с условием по времени изменения (-mtime) для
+выборочной архивации данных.</li>
+</ol>
+<hr />
+<h1 id="контрольные-вопросы">Контрольные вопросы</h1>
+<ol type="1">
+<li>Каково предназначение команды getopts?</li>
+</ol>
+<p>getopts предназначена для синтаксического анализа командной строки.
+Она позволяет скрипту корректно обрабатывать флаги (опции) и их
+аргументы, упрощая создание профессиональных утилит.</p>
+<ol start="2" type="1">
+<li>Какое отношение метасимволы имеют к генерации имён файлов?</li>
+</ol>
+<p>Метасимволы (*, ?, []) используются командным процессором для
+“разворачивания” (globbing) шаблонов в списки существующих имён
+файлов.</p>
+<p>Например, *.txt генерирует список всех текстовых файлов в
+директории.</p>
+<ol start="3" type="1">
+<li>Какие операторы управления действиями вы знаете?</li>
+</ol>
+<p>Операторы:</p>
+<p>Последовательности: ; Логические: &amp;&amp; (И), || (ИЛИ) Конвейер:
+| Условные: if, case Циклы: for, while, until</p>
+<ol start="4" type="1">
+<li>Какие операторы используются для прерывания цикла?</li>
+</ol>
+<p>break — полностью прекращает выполнение цикла и выходит из него.
+continue — прерывает текущую итерацию цикла и переходит к следующей
+проверке условия.</p>
+<ol start="5" type="1">
+<li>Для чего нужны команды false и true?</li>
+</ol>
+<p>Эти команды используются для создания условий в циклах и
+проверках:</p>
+<p>true всегда возвращает код успеха (0). false всегда возвращает код
+ошибки (1).</p>
+<p>Они часто используются в бесконечных циклах: while true; do …;
+done.</p>
+<ol start="6" type="1">
+<li>Что означает строка if test -f man<span
+class="math inline"><em>s</em>/</span>i.$s?</li>
+</ol>
+<p>Эта строка проверяет существование обычного файла по пути man<span
+class="math inline"><em>s</em>/</span>i.$s.</p>
+<p>Оператор test -f возвращает “истину” (0), если файл существует и
+является обычным файлом (не директорией).</p>
+<ol start="7" type="1">
+<li>Объясните различия между конструкциями while и until.</li>
+</ol>
+<p>while выполняет тело цикла пока условие истинно (код возврата 0).
+until выполняет тело цикла пока условие ложно (код возврата не 0), т.е.
+пока условие не станет истинным.</p>
+<hr />
+<h1 id="список-литературы">Список литературы</h1>
+<p>Список литературы</p>
+<ol type="1">
+<li>Кулябов Д. С. и др. Операционные системы: учебное пособие. — М.:
+РУДН, 2024. — С. 97–98.</li>
+<li>GNU Bash Manual. Free Software Foundation, 2026. — URL:
+https://www.gnu.org/software/bash/manual/</li>
+</ol>
+</body>
+</html>

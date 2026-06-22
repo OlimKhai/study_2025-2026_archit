@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>os-intro--lab12--presentation</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#лабораторная-работа-12"
+id="toc-лабораторная-работа-12">Лабораторная работа №12</a>
+<ul>
+<li><a href="#программирование-в-командном-процессоре-ос-unix"
+id="toc-программирование-в-командном-процессоре-ос-unix">Программирование
+в командном процессоре ОС UNIX</a>
+<ul>
+<li><a href="#командные-файлы" id="toc-командные-файлы">Командные
+файлы</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#оглавление" id="toc-оглавление">📋 Оглавление</a></li>
+<li><a href="#цель-работы" id="toc-цель-работы">🎯 Цель работы</a>
+<ul>
+<li><a href="#изучить-основы-программирования-в-оболочке-ос-unixlinux"
+id="toc-изучить-основы-программирования-в-оболочке-ос-unixlinux">Изучить
+основы программирования в оболочке ОС UNIX/Linux</a></li>
+<li><a href="#научиться-писать-небольшие-командные-файлы"
+id="toc-научиться-писать-небольшие-командные-файлы">Научиться писать
+небольшие командные файлы</a>
+<ul>
+<li><a href="#основные-задачи" id="toc-основные-задачи">Основные
+задачи:</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#задание-1-резервное-копирование"
+id="toc-задание-1-резервное-копирование">Задание 1: Резервное
+копирование</a>
+<ul>
+<li><a href="#условие" id="toc-условие">Условие</a></li>
+<li><a href="#задание-1-создание-файла"
+id="toc-задание-1-создание-файла">Задание 1: Создание файла</a></li>
+<li><a href="#задание-1-код-скрипта"
+id="toc-задание-1-код-скрипта">Задание 1: Код скрипта</a></li>
+</ul></li>
+<li><a href="#задание-1-делаем-файл-исполняемым"
+id="toc-задание-1-делаем-файл-исполняемым">Задание 1: Делаем файл
+исполняемым</a></li>
+<li><a href="#задание-2-обработка-аргументов"
+id="toc-задание-2-обработка-аргументов">Задание 2: Обработка
+аргументов</a>
+<ul>
+<li><a href="#задание-2-создание-файла"
+id="toc-задание-2-создание-файла">Задание 2: Создание файла</a></li>
+<li><a href="#задание-2-запуск-с-13-аргументами"
+id="toc-задание-2-запуск-с-13-аргументами">Задание 2: Запуск с 13
+аргументами</a></li>
+</ul></li>
+<li><a href="#задание-3-аналог-команды-ls"
+id="toc-задание-3-аналог-команды-ls">Задание 3: Аналог команды ls</a>
+<ul>
+<li><a href="#задание-3-создание-файла"
+id="toc-задание-3-создание-файла">Задание 3: Создание файла</a></li>
+<li><a href="#задание-3-код-скрипта"
+id="toc-задание-3-код-скрипта">Задание 3: Код скрипта</a></li>
+<li><a href="#задание-4-подсчёт-файлов"
+id="toc-задание-4-подсчёт-файлов">Задание 4: Подсчёт файлов</a></li>
+<li><a href="#создание-файла" id="toc-создание-файла">Создание
+файла</a></li>
+<li><a href="#задание-4-код-скрипта"
+id="toc-задание-4-код-скрипта">Задание 4: Код скрипта</a></li>
+<li><a href="#задание-4-запуск-и-результат"
+id="toc-задание-4-запуск-и-результат">Задание 4: Запуск и
+результат</a></li>
+<li><a href="#выводы" id="toc-выводы">Выводы</a></li>
+<li><a href="#контрольные-вопросы-1-5"
+id="toc-контрольные-вопросы-1-5">Контрольные вопросы (1-5)</a></li>
+</ul></li>
+</ul>
+</nav>
+<!-- _class: title-slide -->
+<h1 id="лабораторная-работа-12">Лабораторная работа №12</h1>
+<h2
+id="программирование-в-командном-процессоре-ос-unix">Программирование в
+командном процессоре ОС UNIX</h2>
+<h3 id="командные-файлы">Командные файлы</h3>
+<p><strong>Студент:</strong> Хайдаров Олим Фирдавсович<br />
+<strong>ORCID:</strong> 0000-0002-0877-7063<br />
+<strong>Дата:</strong> 2026</p>
+<hr />
+<!-- _class: toc -->
+<h1 id="оглавление">📋 Оглавление</h1>
+<p><a href="#3">Цель работы</a></p>
+<p><a href="#4">Задание 1: Резервное копирование</a></p>
+<p><a href="#9">Задание 2: Обработка аргументов</a></p>
+<p><a href="#14">Задание 3: Аналог команды ls</a></p>
+<p><a href="#19">Задание 4: Подсчёт файлов</a></p>
+<p><a href="#24">Выводы</a></p>
+<p><a href="#25">Контрольные вопросы</a></p>
+<hr />
+<h1 id="цель-работы">🎯 Цель работы</h1>
+<h2 id="изучить-основы-программирования-в-оболочке-ос-unixlinux">Изучить
+основы программирования в оболочке ОС UNIX/Linux</h2>
+<h2 id="научиться-писать-небольшие-командные-файлы">Научиться писать
+небольшие командные файлы</h2>
+<h3 id="основные-задачи">Основные задачи:</h3>
+<ul>
+<li>Создание bash-скриптов</li>
+<li>Работа с аргументами командной строки</li>
+<li>Архивация файлов</li>
+<li>Анализ файловой системы</li>
+<li>Проверка прав доступа</li>
+</ul>
+<hr />
+<h1 id="задание-1-резервное-копирование">Задание 1: Резервное
+копирование</h1>
+<h2 id="условие">Условие</h2>
+<p>Создать скрипт, который: 1. ✅ Делает резервную копию <strong>самого
+себя</strong> 2. ✅ Сохраняет в папку <code>~/backup</code> 3. ✅
+Архивирует файл (tar/zip/bzip2)</p>
+<hr />
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-02%2018-52-39.png"
+alt="Скрипт, создание" />
+<figcaption aria-hidden="true">Скрипт, создание</figcaption>
+</figure>
+<hr />
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-02%2018-51-21.png"
+alt="Код скрипта" />
+<figcaption aria-hidden="true">Код скрипта</figcaption>
+</figure>
+<hr />
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-02%2018-53-08.png"
+alt="Запуск скрипта" />
+<figcaption aria-hidden="true">Запуск скрипта</figcaption>
+</figure>
+<hr />
+<h2 id="задание-1-создание-файла">Задание 1: Создание файла</h2>
+<p>Создаём директорию <code>lab12</code> и файл
+<code>task1_backup.sh</code></p>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2018-52-39.png"
+alt="Создание скрипта" />
+<figcaption aria-hidden="true">Создание скрипта</figcaption>
+</figure>
+<hr />
+<h2 id="задание-1-код-скрипта">Задание 1: Код скрипта</h2>
+<p>```bash #!/bin/bash mkdir -p ~/backup SCRIPT_NAME=$(basename “<span
+class="math inline">\(0&quot;)
+TIMESTAMP=\)</span>(date +%Y%m%d_%H%M%S) tar -czf ~/backup/<span
+class="math inline">\({SCRIPT_NAME}.\)</span>{TIMESTAMP}.tar.gz”$0” echo
+“✓ Резервная копия создана!”</p>
+<hr />
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-02%2018-51-21.png"
+alt="Код скрипта" />
+<figcaption aria-hidden="true">Код скрипта</figcaption>
+</figure>
+<hr />
+<h1 id="задание-1-делаем-файл-исполняемым">Задание 1: Делаем файл
+исполняемым</h1>
+<figure>
+<img
+src="/home/ofkhayjdarovdk5n18/Pictures/Screenshots/Screenshot%20From%202026-05-02%2018-53-08.png"
+alt="Запуск скрипта" />
+<figcaption aria-hidden="true">Запуск скрипта</figcaption>
+</figure>
+<p>Результат: Резервная копия успешно создана!</p>
+<hr />
+<h1 id="задание-2-обработка-аргументов">Задание 2: Обработка
+аргументов</h1>
+<p>##Условие</p>
+<p>Написать скрипт, обрабатывающий любое число аргументов (в том числе
+&gt; 10) Особенности:</p>
+<pre><code>Для аргументов &gt; 9 используем ${10}, ${11}
+Перебор всех аргументов через &quot;$@&quot;
+Поддержка аргументов с пробелами</code></pre>
+<hr />
+<h2 id="задание-2-создание-файла">Задание 2: Создание файла</h2>
+<p>Создаём файл tasks2_args.sh</p>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2019-00-52.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<hr />
+<figure>
+<img src="Screenshot%20From%202026-05-02%2018-59-45.png"
+alt="Код скрипта" />
+<figcaption aria-hidden="true">Код скрипта</figcaption>
+</figure>
+<hr />
+<h2 id="задание-2-запуск-с-13-аргументами">Задание 2: Запуск с 13
+аргументами</h2>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2019-01-59.png"
+alt="Запуск файла" />
+<figcaption aria-hidden="true">Запуск файла</figcaption>
+</figure>
+<p>Результат: Все 13 аргументов обработаны корректно!</p>
+<hr />
+<h1 id="задание-3-аналог-команды-ls">Задание 3: Аналог команды ls</h1>
+<p>Создаём файл task3_ls_analog.sh</p>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2019-12-46.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<hr />
+<h2 id="задание-3-создание-файла">Задание 3: Создание файла</h2>
+<p>Создаём файл task3_ls_analog.sh</p>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2019-12-46.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<hr />
+<h2 id="задание-3-код-скрипта">Задание 3: Код скрипта</h2>
+<p><a href="Screenshot%20From%202026-05-02%2019-20-36.png">Запуск
+файла</a></p>
+<p>Результат: Скрипт выводит список файлов с правами доступа!</p>
+<hr />
+<h2 id="задание-4-подсчёт-файлов">Задание 4: Подсчёт файлов</h2>
+<p>Условие:</p>
+<p>Создать скрипт, который:</p>
+<pre><code>Принимает расширение файла (.txt, .sh и т.д.)
+Принимает путь к директории
+Считает количество файлов с таким расширением</code></pre>
+<hr />
+<h2 id="создание-файла">Создание файла</h2>
+<p>Создаём файл task4_count.sh</p>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2019-25-47.png"
+alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<hr />
+<h2 id="задание-4-код-скрипта">Задание 4: Код скрипта</h2>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2019-25-09.png"
+alt="Код скрипта" />
+<figcaption aria-hidden="true">Код скрипта</figcaption>
+</figure>
+<hr />
+<h2 id="задание-4-запуск-и-результат">Задание 4: Запуск и результат</h2>
+<figure>
+<img src="Screenshot%20From%202026-05-02%2019-26-18.png"
+alt="Запуск файла" />
+<figcaption aria-hidden="true">Запуск файла</figcaption>
+</figure>
+<p>Результат: Найдено 4 файла с расширением .sh</p>
+<hr />
+<h2 id="выводы">Выводы</h2>
+<p>В ходе лабораторной работы я:</p>
+<p>Изучил основы программирования в оболочке ОС UNIX/Linux Научился
+писать базовые скрипты и командные файлы</p>
+<p>Освоил:</p>
+<pre><code>Работу с аргументами командной строки
+Создание резервных копий с архивацией
+Анализ файловой системы
+Проверку прав доступа к файлам</code></pre>
+<hr />
+<h2 id="контрольные-вопросы-1-5">Контрольные вопросы (1-5)</h2>
+<ol type="1">
+<li>Командная оболочка — программа для взаимодействия с ОС</li>
+</ol>
+<p>Примеры: sh, csh, ksh, BASH</p>
+<ol start="2" type="1">
+<li><p>POSIX — стандарты для совместимости UNIX/Linux систем</p></li>
+<li><p>Переменные: имя=значение, массивы: set -A имя val1 val2</p></li>
+<li><p>let — арифметика, read — ввод с клавиатуры</p></li>
+<li><p>Операции: +, -, *, /, %, &amp;&amp;, ||, &lt;, &gt; и
+др.</p></li>
+</ol>
+<hr />
+<ol start="6" type="1">
+<li><p>(()) — арифметические выражения без let</p></li>
+<li><p>Стандартные переменные: PATH, HOME, IFS, MAIL, TERM</p></li>
+<li><p>Метасимволы: *, ?, [], &lt;, &gt;, |</p></li>
+<li><p>Экранирование: , ’’, “”</p></li>
+<li><p>Создание файлов: создать → chmod +x → запуск</p></li>
+</ol>
+<hr />
+<ol start="11" type="1">
+<li><p>Функции: fname() { команды }</p></li>
+<li><p>Проверка файлов: test -f, test -d</p></li>
+<li><p>set — список переменных, typeset — атрибуты, unset —
+удаление</p></li>
+<li><p>Параметры: 0, $1, $2, … ${10},</p></li>
+<li><p>Специальные переменные: ?,?,,,!, ∗,∗,@</p></li>
+</ol>
+<hr />
+<p>Спасибо за внимание!</p>
+</body>
+</html>
